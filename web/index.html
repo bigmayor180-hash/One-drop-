@@ -2,51 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>OceanicOS — Drop UI</title>
-    <style>
-      body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial;margin:2rem}
-      header{margin-bottom:1rem}
-      .card{border:1px solid #ddd;padding:1rem;border-radius:6px;margin-bottom:1rem}
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OceanicOS — Drop</title>
   </head>
   <body>
-    <header>
-      <h1>OceanicOS — Drop</h1>
-      <small>One Drop. Infinite Reflections.</small>
-    </header>
-
-    <div class="card">
-      <h3>Observe</h3>
-      <form id="observeForm">
-        <input id="source" placeholder="source" value="web" />
-        <input id="payload" placeholder='payload json (e.g. {"msg":"hi"})' style="width:60%" />
-        <button type="submit">Send</button>
-      </form>
-      <pre id="observeResult"></pre>
-    </div>
-
-    <div class="card">
-      <h3>Status</h3>
-      <button id="statusBtn">Refresh</button>
-      <pre id="statusResult"></pre>
-    </div>
-
-    <script>
-      document.getElementById('observeForm').addEventListener('submit', async e=>{
-        e.preventDefault();
-        const src=document.getElementById('source').value;
-        const payloadText=document.getElementById('payload').value||'{}';
-        let payload={};
-        try{payload=JSON.parse(payloadText)}catch(e){document.getElementById('observeResult').innerText='Invalid JSON';return}
-        const res=await fetch('/observe',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({source:src,payload})});
-        document.getElementById('observeResult').innerText=JSON.stringify(await res.json(),null,2);
-      })
-
-      document.getElementById('statusBtn').addEventListener('click', async ()=>{
-        const res=await fetch('/status');
-        document.getElementById('statusResult').innerText=JSON.stringify(await res.json(),null,2);
-      })
-    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
   </body>
 </html>

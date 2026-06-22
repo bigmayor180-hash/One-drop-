@@ -403,9 +403,11 @@ This is probably the closest practical definition of **OceanicOS as an end-to-en
 
 GitHub Copilot:
  
-## Run
+## Quick Start
 
-Run locally (recommended):
+See [GETTING_STARTED.md](GETTING_STARTED.md) for detailed setup instructions.
+
+**TL;DR:**
 
 ```bash
 python3 -m venv venv
@@ -414,32 +416,36 @@ pip install -r requirements.txt
 python drop.py
 ```
 
-Open the UI at http://localhost:8000/ and the API at `/status` and `/observe`.
+Then open `http://localhost:8000` in your browser.
 
-Switch memory backend to JSON:
+## Features
 
+✅ **Core Loop** — Observe → Remember → Learn → Create → Steward → Return  
+✅ **Web Dashboard** — React UI for status and observations  
+✅ **Multiple Memory Backends** — SQLite, JSON, Chroma (vector DB)  
+✅ **API Key Auth** — Optional protection for write endpoints  
+✅ **Model Integration** — OpenAI stubs, local LLM support  
+✅ **Docker Ready** — Single-command deployment  
+✅ **Tested & CI/CD** — GitHub Actions pipeline  
+
+## Configuration
+
+### Memory Backend
 ```bash
-export MEMORY_BACKEND=json
-python drop.py
+export MEMORY_BACKEND=json  # or sqlite, chroma
 ```
 
-Optional: configure `OPENAI_API_KEY` to enable the `/learn` endpoint.
-
-API key protection
-
-To require an API key for write endpoints set `OCEANIC_API_KEY`:
-
+### API Key Protection
 ```bash
-export OCEANIC_API_KEY="your-secret"
+export OCEANIC_API_KEY=your-secret
 ```
 
-Then send requests with `X-API-KEY` or `Authorization: Bearer <key>`:
-
+### OpenAI Integration
 ```bash
-curl -H "X-API-KEY: your-secret" -d '{"source":"cli","payload":{"msg":"hi"}}' -H "Content-Type: application/json" http://localhost:8000/observe
+export OPENAI_API_KEY=sk-...
 ```
 
-Docker:
+## Docker
 
 ```bash
 docker build -t oceanicos .
