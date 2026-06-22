@@ -423,6 +423,20 @@ python drop.py
 
 Optional: configure `OPENAI_API_KEY` to enable the `/learn` endpoint.
 
+API key protection
+
+To require an API key for write endpoints set `OCEANIC_API_KEY`:
+
+```bash
+export OCEANIC_API_KEY="your-secret"
+```
+
+Then send requests with `X-API-KEY` or `Authorization: Bearer <key>`:
+
+```bash
+curl -H "X-API-KEY: your-secret" -d '{"source":"cli","payload":{"msg":"hi"}}' -H "Content-Type: application/json" http://localhost:8000/observe
+```
+
 Docker:
 
 ```bash

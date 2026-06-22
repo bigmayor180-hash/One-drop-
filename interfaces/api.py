@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Depends
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
@@ -6,6 +6,7 @@ import asyncio
 import os
 
 from kernel.drop import Drop
+from .auth import require_api_key
 
 app = FastAPI(title="OceanicOS API")
 _drop = Drop()
@@ -42,7 +43,7 @@ async def status():
 
 
 @app.post("/observe")
-async def observe(obs: Observation):
+async def observe(obs: Observation, _auth=Depends(require_api_key)):
     try:
         await _drop.observe({"source": obs.source, "payload": obs.payload})
         return {"ok": True}
@@ -51,7 +52,7 @@ async def observe(obs: Observation):
 
 
 @app.post("/learn")
-async def learn(request: Request):
+async def learn(request: Request, _auth=Depends(require_api_key)):
     # lightweight model integration stub: uses OPENAI_API_KEY if present
     data = await request.json()
     prompt = data.get("prompt")
