@@ -6,6 +6,10 @@ def get_memory():
 		from .json_memory import JSONMemory
 
 		return JSONMemory()
+	elif backend == "chroma":
+		from .chroma_memory import ChromaMemory
+
+		return ChromaMemory()
 	else:
 		from .memory import Memory
 

@@ -34,7 +34,9 @@ Return a Better Drop.
 
 while True:
 
-		Observe()
+I added Chroma and local LLM stubs. Use `MEMORY_BACKEND=chroma` to select Chroma (install `chromadb`).
+
+Local LLMs: `models/local_llm.py` is a placeholder — replace with your preferred local model runner.
 
 		Remember()
 
