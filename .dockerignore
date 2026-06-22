@@ -1,0 +1,5 @@
+__pycache__
+venv
+oceanic_memory.db
+oceanic_memory.json
+.git

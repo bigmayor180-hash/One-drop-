@@ -1,11 +1,11 @@
 import asyncio
-from memory.memory import Memory
+from memory import get_memory
 
 
 class Drop:
     def __init__(self, name="OneDrop"):
         self.name = name
-        self.memory = Memory()
+        self.memory = get_memory()
         self.running = False
 
     async def boot(self):

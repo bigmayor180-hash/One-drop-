@@ -400,3 +400,32 @@ while True:
 This is probably the closest practical definition of **OceanicOS as an end-to-end AI Operator System**: not one model, but an orchestrator that can sit above many models, memories, tools, and interfaces while remaining lightweight enough to run as a single local "Drop." 💧♾️Ω
 
 GitHub Copilot:
+ 
+## Run
+
+Run locally (recommended):
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python drop.py
+```
+
+Open the UI at http://localhost:8000/ and the API at `/status` and `/observe`.
+
+Switch memory backend to JSON:
+
+```bash
+export MEMORY_BACKEND=json
+python drop.py
+```
+
+Optional: configure `OPENAI_API_KEY` to enable the `/learn` endpoint.
+
+Docker:
+
+```bash
+docker build -t oceanicos .
+docker run -p 8000:8000 oceanicos
+```
